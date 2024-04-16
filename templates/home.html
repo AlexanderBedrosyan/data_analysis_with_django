@@ -5,7 +5,6 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/static/style/home.css">
     <title>Welcome!</title>
 </head>
 <body>
@@ -16,6 +15,40 @@
         <button type="submit">Upload</button>
     </form>
 
+    <div class="form-control" style="display: none">
+        <label for="label">Choose Company:</label>
+        <select id="label">
+        </select>
+        <button id="difference" type="submit">Differences</button>
+    </div>
+
+    <div class="differences">
+    </div>
+
+    <script>
+        const button = document.querySelector('button[type="submit"]');
+        const formControl = document.querySelector('.form-control');
+
+        button.addEventListener('click', function(event) {
+            event.preventDefault()
+            formControl.style.display = 'block';
+            const resultData = JSON.parse('{{ result|safe }}');
+            for (const key in resultData) {
+                const select =  document.querySelector('#label')
+                const option = document.createElement('option')
+                option.value = key
+                option.textContent = key
+                select.appendChild(option)
+            }
+            
+            const differences = document.querySelector('#difference');
+            
+            differences.addEventListener('click', function(event){
+                event.preventDefault()
+                console.log('dokarahme go do tuk')
+            })
+        })
+    </script>
 
 </body>
 </html>
