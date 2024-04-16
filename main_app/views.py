@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render
 from django.views import View
 from openpyxl import load_workbook
@@ -36,10 +38,7 @@ class Home(View):
 
             all_companies.add_new_company_object(new_company)
 
-        print(all_companies.companies)
         result = all_companies.difference_checker()
-        for key in result:
-            print(key)
-            print(result[key])
+        print(result)
 
-        return render(request, 'home.html')
+        return render(request, 'home.html', {"result": json.dumps(result)})
