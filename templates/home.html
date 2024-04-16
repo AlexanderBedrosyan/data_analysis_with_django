@@ -33,19 +33,31 @@
             event.preventDefault()
             formControl.style.display = 'block';
             const resultData = JSON.parse('{{ result|safe }}');
+            console.log(resultData)
+            const select =  document.querySelector('#label')
             for (const key in resultData) {
-                const select =  document.querySelector('#label')
                 const option = document.createElement('option')
                 option.value = key
                 option.textContent = key
                 select.appendChild(option)
             }
-            
+
             const differences = document.querySelector('#difference');
-            
+
             differences.addEventListener('click', function(event){
                 event.preventDefault()
-                console.log('dokarahme go do tuk')
+                let showDiff = document.querySelector('.differences');
+                for (const company in resultData[select.value]) {
+                    const h1 = document.createElement('h1')
+                    h1.textContent = company
+                    showDiff.appendChild(h1)
+
+                    resultData[select.value][company].forEach(element => {
+                        const p = document.createElement('p');
+                        p.textContent = element
+                        showDiff.appendChild(p)
+                    })
+                }
             })
         })
     </script>
