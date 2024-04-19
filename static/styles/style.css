@@ -37,8 +37,13 @@ select, #difference {
     background-color: #45a049;
 }
 
-.differences {
+.differences, .matches {
     margin: 20px;
+}
+
+.differences > h1 {
+    color: red;
+    font-style: italic;
 }
 
 h1 {
