@@ -13,7 +13,7 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="file" name="fileInput">
-        <button type="submit">Upload</button>
+        <button id="upload" type="submit">Upload</button>
         <button id="show-differences" type="submit">Show More</button>
     </form>
 
@@ -27,6 +27,10 @@
     <div class="differences">
     </div>
 
+    <div class="matches">
+
+    </div>
+
     <script>
         const button = document.querySelector('#show-differences');
         const formControl = document.querySelector('.form-control');
@@ -35,7 +39,6 @@
             event.preventDefault()
             formControl.style.display = 'block';
             const resultData = JSON.parse('{{ result|safe }}');
-            console.log(resultData)
             const select =  document.querySelector('#label')
             for (const key in resultData) {
                 const option = document.createElement('option')
@@ -45,14 +48,21 @@
             }
 
             const differences = document.querySelector('#difference');
+            const companies = Object.keys(resultData)
 
             differences.addEventListener('click', function(event){
                 event.preventDefault()
                 let showDiff = document.querySelector('.differences');
                 showDiff.innerHTML = '';
+                const h1diff = document.createElement('h1');
+                h1diff.textContent = 'All Differences'
+                showDiff.appendChild(h1diff)
+                
+                const allCompaniesDiff = Object.keys(resultData[select.value]);
+
                 for (const company in resultData[select.value]) {
                     const h1 = document.createElement('h1')
-                    h1.textContent = company
+                    h1.textContent = `✘ ${company}`
                     showDiff.appendChild(h1)
 
                     resultData[select.value][company].forEach(element => {
@@ -61,6 +71,20 @@
                         showDiff.appendChild(p)
                     })
                 }
+
+                const divMatches = document.querySelector('.matches');
+                divMatches.innerHTML = '';
+                const h1matches = document.createElement('h1');
+                h1matches.textContent = 'All matches'
+                divMatches.appendChild(h1matches)
+
+                companies.forEach(element => {
+                    if (!(element === select.value || allCompaniesDiff.includes(element))){
+                        const p = document.createElement('p');
+                        p.textContent = `✓ ${element}`
+                        divMatches.appendChild(p)
+                    }
+                })
             })
         })
     </script>
