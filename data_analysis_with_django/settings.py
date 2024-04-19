@@ -70,6 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'data_analysis_with_django.wsgi.application'
+ASGI_APPLICATION = 'data_analysis_with_django.asgi.application'
 
 
 # Database
