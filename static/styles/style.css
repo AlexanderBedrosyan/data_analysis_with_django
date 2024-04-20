@@ -20,7 +20,7 @@ label {
     margin-right: 10px;
 }
 
-select, #difference {
+select, #difference, #delete {
     margin-top: 10px;
     padding: 5px 10px;
     font-size: 16px;
@@ -53,4 +53,15 @@ h1 {
 
 p {
     margin: 5px 0;
+}
+
+button#delete {
+    background-color: #c26363;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#delete:hover {
+    background-color: red;
 }
