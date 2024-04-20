@@ -22,6 +22,7 @@
         <select id="label">
         </select>
         <button id="difference" type="submit">Differences</button>
+        <button id="delete" type="submit">Delete</button>
     </div>
 
     <div class="differences">
@@ -39,7 +40,9 @@
             event.preventDefault()
             formControl.style.display = 'block';
             const resultData = JSON.parse('{{ result|safe }}');
-            const select =  document.querySelector('#label')
+            const select =  document.querySelector('#label');
+            const deleteBtn = document.querySelector('#delete');
+            
             for (const key in resultData) {
                 const option = document.createElement('option')
                 option.value = key
@@ -49,10 +52,11 @@
 
             const differences = document.querySelector('#difference');
             const companies = Object.keys(resultData)
+            const showDiff = document.querySelector('.differences');
+            const divMatches = document.querySelector('.matches');
 
             differences.addEventListener('click', function(event){
                 event.preventDefault()
-                let showDiff = document.querySelector('.differences');
                 showDiff.innerHTML = '';
                 const h1diff = document.createElement('h1');
                 h1diff.textContent = 'All Differences'
@@ -71,8 +75,7 @@
                         showDiff.appendChild(p)
                     })
                 }
-
-                const divMatches = document.querySelector('.matches');
+                
                 divMatches.innerHTML = '';
                 const h1matches = document.createElement('h1');
                 h1matches.textContent = 'All matches'
@@ -85,6 +88,12 @@
                         divMatches.appendChild(p)
                     }
                 })
+            })
+            
+            deleteBtn.addEventListener('click', function(event) {
+                event.preventDefault()
+                showDiff.innerHTML = '';
+                divMatches.innerHTML = '';
             })
         })
     </script>
