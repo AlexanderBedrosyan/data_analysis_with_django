@@ -26,6 +26,11 @@ select, #difference, #delete {
     font-size: 16px;
 }
 
+#difference, #delete {
+    border-radius: 14px;
+    font-weight: bold;
+}
+
 #difference {
     background-color: #4CAF50;
     color: white;
@@ -39,6 +44,8 @@ select, #difference, #delete {
 
 .differences, .matches {
     margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
 }
 
 .differences > h1 {
@@ -64,4 +71,26 @@ button#delete {
 
 #delete:hover {
     background-color: red;
+}
+
+#upload, #show-differences {
+    background-color: deepskyblue;
+    color: white;
+    font-size: 16px;
+    padding: 5px 9px 5px 9px;
+    border-radius: 14px;
+    border: 1px SOLID beige;
+    font-weight: bold;
+}
+
+#upload:hover {
+    background-color: #9dcce0;
+}
+
+#show-differences:hover {
+    background-color: #9dcce0;
+}
+
+input[type="hidden"] {
+    background-color: #4CAF50;
 }
