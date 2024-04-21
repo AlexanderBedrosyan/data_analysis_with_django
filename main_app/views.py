@@ -5,6 +5,7 @@ from django.views import View
 from openpyxl import load_workbook
 from io import BytesIO
 from .objects_of_companies.companies_db import AllCompanies, SingleCompany
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -16,6 +17,9 @@ class Home(View):
 
     def post(self, request, *args, **kwargs):
         file = request.FILES.get('fileInput')
+        if not file:
+            return HttpResponse("You have to choose file!", status=400)
+
         file_content = BytesIO(file.read())
         workbook = load_workbook(file_content)
         sheet_names = workbook.sheetnames
